@@ -12,14 +12,7 @@ import GithubState from './context/github/GithubState';
 import AlertState from './context/alert/AlertState';
 import './App.css';
 
-// Class based component changed to function component for useState hook
 const App = () => {
-  // const [users, setUsers] = useState([]);
-  // const [user, setUser] = useState({});
-  // const [repos, setRepos] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  // const [alert, setAlert] = useState(null);
-
   return (
     <GithubState>
       <AlertState>

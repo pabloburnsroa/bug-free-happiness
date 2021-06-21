@@ -2,30 +2,22 @@ import {
   SEARCH_USERS,
   SET_LOADING,
   CLEAR_USERS,
-  GET_USER,
-  GET_REPOS,
+  GET_USER_AND_REPOS,
 } from '../types';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action) => {
   switch (action.type) {
-    case SEARCH_USERS:
+    case SET_LOADING:
       return {
         ...state,
-        users: action.payload,
-        loading: false,
+        loading: true,
       };
-    case GET_USER:
+    case GET_USER_AND_REPOS:
       return {
         ...state,
-        user: action.payload,
-        loading: false,
-      };
-
-    case GET_REPOS:
-      return {
-        ...state,
-        repos: action.payload,
+        user: action.payload.user,
+        repos: action.payload.repos,
         loading: false,
       };
     case CLEAR_USERS:
@@ -34,13 +26,13 @@ export default (state, action) => {
         users: [],
         loading: false,
       };
-
-    case SET_LOADING:
+    case SEARCH_USERS:
       return {
         ...state,
-        loading: true,
+        users: action.payload,
+        loading: false,
       };
     default:
-      return state;
+      throw Error(`Unhandled Action: ${action.type}`);
   }
 };

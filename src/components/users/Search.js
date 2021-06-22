@@ -1,30 +1,29 @@
-import React, { useState, useContext } from 'react'
-import GithubContext from '../../context/github/gitHubContext'
-import AlertContext from '../../context/alert/alertContext'
-import { searchUsers } from '../../context/github/actions'
-import { SEARCH_USERS, SET_LOADING, CLEAR_USERS } from '../../context/types'
+import React, { useState, useContext } from 'react';
+import GithubContext from '../../context/github/githubContext';
+import AlertContext from '../../context/alert/alertContext';
+import { searchUsers } from '../../context/github/actions';
+import { SEARCH_USERS, SET_LOADING, CLEAR_USERS } from '../../context/types';
 
 const Search = () => {
-  const { dispatch, users } = useContext(GithubContext)
-  const { setAlert } = useContext(AlertContext)
+  const { dispatch, users } = useContext(GithubContext);
+  const { setAlert } = useContext(AlertContext);
 
-  const [text, setText] = useState('')
+  const [text, setText] = useState('');
 
-  const onSubmit = e => {
-    e.preventDefault()
+  const onSubmit = (e) => {
+    e.preventDefault();
     if (text === '') {
-      setAlert('Please enter something', 'light')
+      setAlert('Please enter something', 'light');
     } else {
-      dispatch({ type: SET_LOADING })
-      searchUsers(text).then(users => {
-        dispatch({ type: SEARCH_USERS, payload: users })
-        setText('')
-      })
+      dispatch({ type: SET_LOADING });
+      searchUsers(text).then((users) => {
+        dispatch({ type: SEARCH_USERS, payload: users });
+        setText('');
+      });
     }
-  }
+  };
 
-  const onChange = e => setText(e.target.value)
-
+  const onChange = (e) => setText(e.target.value);
 
   return (
     <div className="mb-3">
